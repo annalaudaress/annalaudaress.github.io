@@ -3,444 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>anna — devops engineer</title>
-    <meta name="description" content="Anna — DevOps Engineer. AWS, Azure, Kubernetes, Terraform, Security.">
+    <title>anna — devops zine</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #0f0f0f;
-            --surface: #161616;
-            --surface2: #1c1c1c;
-            --border: #2a2a2a;
-            --text: #e8e8e8;
-            --text-dim: #888;
-            --accent: #c4b5fd;
-            --accent2: #67e8f9;
-            --warm: #fbbf24;
-            --green: #86efac;
-            --pink: #f9a8d4;
+            --paper: #1a1a2e;
+            --panel: #16213e;
+            --panel2: #0f3460;
+            --ink: #eaeaea;
+            --accent1: #e94560;
+            --accent2: #ffd369;
+            --accent3: #00fff5;
+            --accent4: #a8ff78;
+            --accent5: #ff6b9d;
+            --marker: 'Permanent Marker', cursive;
+            --hand: 'Caveat', cursive;
             --mono: 'Space Mono', monospace;
-            --sans: 'Inter', sans-serif;
         }
 
         body {
             font-family: var(--mono);
-            background: var(--bg);
-            color: var(--text);
+            background: var(--paper);
+            color: var(--ink);
+            min-height: 100vh;
             font-size: 14px;
-            line-height: 1.6;
-            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(233,69,96,0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(0,255,245,0.04) 0%, transparent 40%);
         }
 
-        /* ===== HEADER — zine style ===== */
-        header {
-            padding: 60px 30px 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: end;
-            gap: 30px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        header h1 {
-            font-size: clamp(48px, 8vw, 80px);
-            font-weight: 700;
-            letter-spacing: -3px;
-            line-height: 0.9;
-            color: var(--text);
-        }
-
-        header h1 span {
-            display: block;
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-top: 10px;
-        }
-
-        header .header-right {
-            text-align: right;
-            font-size: 11px;
-            color: var(--text-dim);
-            line-height: 2;
-        }
-
-        header .header-right a {
-            color: var(--accent2);
-            text-decoration: none;
-        }
-
-        header .header-right a:hover {
-            text-decoration: underline;
-        }
-
-        .lang-switch {
-            position: fixed;
-            top: 16px;
-            right: 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--warm);
-            font-family: var(--mono);
-            font-size: 10px;
-            padding: 4px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            z-index: 200;
-            transition: border-color 0.2s;
-        }
-
-        .lang-switch:hover { border-color: var(--warm); }
-
-        /* ===== NAV — horizontal zine tabs ===== */
-        nav {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 30px;
-            display: flex;
-            gap: 0;
-            border-bottom: 1px solid var(--border);
-            overflow-x: auto;
-        }
-
-        nav button {
-            background: none;
-            border: none;
-            font-family: var(--mono);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 16px 20px;
-            color: var(--text-dim);
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        nav button:hover { color: var(--text); }
-        nav button.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-
-        /* ===== CONTENT ===== */
-        .content {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 30px 80px;
-        }
-
-        .panel { display: none; }
-        .panel.active { display: block; animation: slideUp 0.3s ease; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== ZINE GRID ===== */
-        .zine-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        .zine-block {
-            padding: 24px;
-            border: 1px solid var(--border);
+        /* ===== COVER ===== */
+        .cover {
+            padding: 50px 30px;
+            text-align: center;
             position: relative;
+            border-bottom: 4px solid var(--accent1);
         }
 
-        .zine-block::before {
-            content: attr(data-label);
-            position: absolute;
-            top: -9px;
-            left: 12px;
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            background: var(--bg);
-            padding: 0 6px;
-        }
-
-        .zine-block.full {
-            grid-column: 1 / -1;
-        }
-
-        .zine-block h3 {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent2);
-            margin-bottom: 14px;
-        }
-
-        .zine-block p, .zine-block li {
-            font-family: var(--sans);
-            font-size: 13px;
-            color: var(--text-dim);
-            line-height: 1.8;
-        }
-
-        .zine-block ul {
-            list-style: none;
-        }
-
-        .zine-block ul li::before {
-            content: '→ ';
-            color: var(--accent);
-        }
-
-        /* ===== TAGS ===== */
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 12px;
-        }
-
-        .tag {
-            font-family: var(--mono);
-            font-size: 10px;
-            padding: 3px 10px;
-            border: 1px solid var(--border);
-            color: var(--text-dim);
-            letter-spacing: 0.5px;
-        }
-
-        .tag:hover { border-color: var(--accent); color: var(--accent); }
-
-        /* ===== EXPERIENCE ===== */
-        .exp-entry {
-            margin-bottom: 28px;
-            padding-left: 16px;
-            border-left: 2px solid var(--border);
-        }
-
-        .exp-entry:hover { border-left-color: var(--accent); }
-
-        .exp-entry .period {
-            font-size: 10px;
-            color: var(--warm);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .exp-entry .title {
-            font-size: 15px;
-            font-weight: 700;
-            margin: 4px 0 6px;
-        }
-
-        .exp-entry .desc {
-            font-family: var(--sans);
-            font-size: 12px;
-            color: var(--text-dim);
-            line-height: 1.7;
-        }
-
-        /* ===== CERT TABLE ===== */
-        .cert-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .cert-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            border: 1px solid var(--border);
-            transition: border-color 0.2s;
-        }
-
-        .cert-row:hover { border-color: var(--accent); }
-        .cert-row .cert-status { font-size: 14px; }
-        .cert-row .cert-name { flex: 1; font-size: 12px; }
-        .cert-row .cert-issuer { font-size: 10px; color: var(--text-dim); }
-        .cert-row.earned { border-color: var(--green); background: rgba(134,239,172,0.03); }
-
-        /* ===== PROJECT CARDS ===== */
-        .project-item {
-            border: 1px solid var(--border);
-            padding: 20px;
-            margin-bottom: 14px;
-            transition: border-color 0.2s;
-        }
-
-        .project-item:hover { border-color: var(--green); }
-
-        .project-item .proj-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--green);
-            margin-bottom: 6px;
-        }
-
-        .project-item .proj-desc {
-            font-family: var(--sans);
-            font-size: 12px;
-            color: var(--text-dim);
-            line-height: 1.7;
+        .cover h1 {
+            font-family: var(--marker);
+            font-size: clamp(60px, 12vw, 100px);
+            color: var(--accent3);
+            text-shadow: 4px 4px 0 var(--accent1), -2px -2px 0 var(--panel);
+            transform: rotate(-2deg);
             margin-bottom: 8px;
         }
 
-        .project-item a {
-            font-size: 11px;
+        .cover .subtitle {
+            font-family: var(--hand);
+            font-size: 28px;
             color: var(--accent2);
-            text-decoration: none;
+            transform: rotate(1deg);
         }
 
-        .project-item a:hover { text-decoration: underline; }
-
-        /* ===== TALKS / ARTICLES ===== */
-        .entry-card {
-            border-bottom: 1px solid var(--border);
-            padding: 18px 0;
-        }
-
-        .entry-card:last-child { border-bottom: none; }
-        .entry-card:hover .entry-title { color: var(--accent); }
-
-        .entry-card .entry-meta {
-            font-size: 10px;
-            color: var(--warm);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .entry-card .entry-title {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            transition: color 0.2s;
-        }
-
-        .entry-card .entry-desc {
-            font-family: var(--sans);
+        .cover .issue {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-family: var(--marker);
             font-size: 12px;
-            color: var(--text-dim);
+            color: var(--accent1);
+            border: 2px solid var(--accent1);
+            padding: 4px 10px;
+            transform: rotate(3deg);
         }
 
-        .entry-card a {
+        .lang-btn {
+            position: absolute;
+            top: 16px;
+            left: 20px;
+            font-family: var(--mono);
+            font-size: 10px;
+            background: var(--panel);
+            border: 2px solid var(--accent2);
             color: var(--accent2);
-            font-size: 11px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 6px;
+            padding: 4px 10px;
+            cursor: pointer;
+            transform: rotate(-1deg);
         }
 
-        .entry-card a:hover { text-decoration: underline; }
+        .lang-btn:hover { background: var(--accent2); color: var(--paper); }
 
-        /* ===== COMMUNITY ===== */
-        .comm-grid {
+        /* ===== NAV ===== */
+        .nav-strip {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            padding: 12px;
+            flex-wrap: wrap;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 3px solid var(--accent2);
+        }
+
+        .nav-strip button {
+            font-family: var(--marker);
+            font-size: 13px;
+            background: var(--panel);
+            border: 2px solid var(--ink);
+            color: var(--ink);
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.15s;
+            transform: rotate(0deg);
+        }
+
+        .nav-strip button:nth-child(odd) { transform: rotate(-1deg); }
+        .nav-strip button:nth-child(even) { transform: rotate(1deg); }
+
+        .nav-strip button:hover {
+            background: var(--accent1);
+            border-color: var(--accent1);
+            color: white;
+            transform: scale(1.05) rotate(0deg);
+        }
+
+        .nav-strip button.active {
+            background: var(--accent2);
+            color: var(--paper);
+            border-color: var(--accent2);
+            transform: scale(1.08) rotate(0deg);
+        }
+
+        /* ===== CONTENT ===== */
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        .panel { display: none; }
+        .panel.active { display: block; }
+
+        /* ===== COMIC PANELS ===== */
+        .panels {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 14px;
         }
 
-        .comm-item {
-            border: 1px solid var(--border);
-            padding: 18px;
-            transition: border-color 0.2s;
+        .comic-panel {
+            border: 3px solid var(--ink);
+            padding: 20px;
+            background: var(--panel);
+            position: relative;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.4);
         }
 
-        .comm-item:hover { border-color: var(--pink); }
+        .comic-panel.wide { grid-column: 1 / -1; }
+        .comic-panel.tilt-l { transform: rotate(-0.5deg); }
+        .comic-panel.tilt-r { transform: rotate(0.5deg); }
 
-        .comm-item .comm-role {
+        .comic-panel .panel-label {
+            position: absolute;
+            top: -12px;
+            left: 10px;
+            font-family: var(--marker);
+            font-size: 11px;
+            background: var(--accent2);
+            color: var(--paper);
+            padding: 2px 10px;
+            transform: rotate(-2deg);
+        }
+
+        .comic-panel h3 {
+            font-family: var(--marker);
+            font-size: 16px;
+            color: var(--accent3);
+            margin-bottom: 10px;
+        }
+
+        .comic-panel p {
+            font-family: var(--hand);
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--ink);
+        }
+
+        .comic-panel .small {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* ===== SPEECH BUBBLE ===== */
+        .bubble {
+            background: white;
+            color: var(--paper);
+            font-family: var(--hand);
+            font-size: 18px;
+            padding: 14px 18px;
+            border-radius: 20px;
+            position: relative;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 24px;
+            border-width: 10px 8px 0;
+            border-style: solid;
+            border-color: white transparent transparent;
+        }
+
+        /* ===== STICKER ===== */
+        .sticker {
+            display: inline-block;
+            font-family: var(--marker);
+            font-size: 11px;
+            padding: 4px 10px;
+            border: 2px solid;
+            transform: rotate(-2deg);
+            margin: 3px;
+        }
+
+        .sticker-1 { border-color: var(--accent1); color: var(--accent1); }
+        .sticker-2 { border-color: var(--accent3); color: var(--accent3); }
+        .sticker-3 { border-color: var(--accent2); color: var(--accent2); }
+        .sticker-4 { border-color: var(--accent4); color: var(--accent4); }
+        .sticker-5 { border-color: var(--accent5); color: var(--accent5); }
+
+        .stickers { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 4px; }
+
+        /* ===== EXP TIMELINE ===== */
+        .exp-block {
+            border-left: 4px solid var(--accent1);
+            padding: 14px 18px;
+            margin-bottom: 16px;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .exp-block .exp-date {
+            font-family: var(--marker);
             font-size: 12px;
-            font-weight: 700;
-            color: var(--pink);
+            color: var(--accent2);
+        }
+
+        .exp-block .exp-title {
+            font-family: var(--marker);
+            font-size: 18px;
+            color: var(--accent3);
+            margin: 4px 0;
+        }
+
+        .exp-block .exp-desc {
+            font-family: var(--hand);
+            font-size: 17px;
+            color: #bbb;
+        }
+
+        /* ===== CERT LIST ===== */
+        .cert-entry {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-bottom: 2px dashed #333;
+        }
+
+        .cert-entry .cert-dot {
+            width: 14px; height: 14px;
+            border: 2px solid var(--accent4);
+            border-radius: 50%;
+        }
+
+        .cert-entry.done .cert-dot {
+            background: var(--accent4);
+        }
+
+        .cert-entry .cert-name {
+            font-family: var(--hand);
+            font-size: 18px;
+            flex: 1;
+        }
+
+        .cert-entry .cert-from {
+            font-size: 10px;
+            color: #777;
+        }
+
+        /* ===== PROJECT CARDS ===== */
+        .proj-card {
+            border: 3px solid var(--accent4);
+            padding: 18px;
+            margin-bottom: 14px;
+            background: var(--panel);
+            box-shadow: 4px 4px 0 rgba(168,255,120,0.1);
+            transform: rotate(0.3deg);
+        }
+
+        .proj-card:nth-child(even) { transform: rotate(-0.3deg); border-color: var(--accent3); }
+
+        .proj-card .proj-name {
+            font-family: var(--marker);
+            font-size: 16px;
+            color: var(--accent4);
+            margin-bottom: 6px;
+        }
+
+        .proj-card:nth-child(even) .proj-name { color: var(--accent3); }
+
+        .proj-card .proj-desc {
+            font-family: var(--hand);
+            font-size: 17px;
+            color: #bbb;
+            margin-bottom: 8px;
+        }
+
+        .proj-card a {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--accent2);
+            text-decoration: none;
+        }
+
+        .proj-card a:hover { text-decoration: underline; }
+
+        /* ===== ENTRY (talks/articles) ===== */
+        .zine-entry {
+            border: 2px solid #444;
+            padding: 16px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .zine-entry::before {
+            content: '★';
+            position: absolute;
+            top: -8px;
+            right: 12px;
+            font-size: 16px;
+            color: var(--accent2);
+        }
+
+        .zine-entry .ze-meta {
+            font-family: var(--marker);
+            font-size: 11px;
+            color: var(--accent5);
+        }
+
+        .zine-entry .ze-title {
+            font-family: var(--hand);
+            font-size: 22px;
+            color: var(--ink);
+            margin: 4px 0;
+        }
+
+        .zine-entry .ze-desc {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .zine-entry a {
+            color: var(--accent3);
+            font-size: 11px;
+            text-decoration: none;
+        }
+
+        /* ===== COMMUNITY GRID ===== */
+        .comm-stickers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .comm-badge {
+            border: 3px solid;
+            padding: 14px 20px;
+            text-align: center;
+            transform: rotate(-1deg);
+            min-width: 140px;
+        }
+
+        .comm-badge:nth-child(1) { border-color: var(--accent1); transform: rotate(-2deg); }
+        .comm-badge:nth-child(2) { border-color: var(--accent3); transform: rotate(1deg); }
+        .comm-badge:nth-child(3) { border-color: var(--accent2); transform: rotate(-1deg); }
+        .comm-badge:nth-child(4) { border-color: var(--accent5); transform: rotate(2deg); }
+        .comm-badge:nth-child(5) { border-color: var(--accent4); transform: rotate(-0.5deg); }
+
+        .comm-badge .cb-role {
+            font-family: var(--marker);
+            font-size: 13px;
             margin-bottom: 4px;
         }
 
-        .comm-item .comm-org {
-            font-size: 11px;
-            color: var(--text-dim);
+        .comm-badge .cb-org {
+            font-family: var(--hand);
+            font-size: 16px;
+            color: #bbb;
         }
 
         /* ===== CONTACT ===== */
-        .contact-row {
+        .contact-blocks {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
-        .contact-link {
-            border: 1px solid var(--border);
-            padding: 14px 24px;
+        .contact-block {
+            border: 3px solid var(--accent3);
+            padding: 16px 24px;
             text-decoration: none;
-            font-size: 12px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .contact-block:hover { transform: scale(1.05) rotate(-1deg); }
+
+        .contact-block .cb-label {
+            font-family: var(--marker);
+            font-size: 10px;
             color: var(--accent2);
-            transition: all 0.2s;
         }
 
-        .contact-link:hover {
-            border-color: var(--accent2);
-            background: rgba(103, 232, 249, 0.04);
-        }
-
-        .contact-link .cl-label {
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-dim);
-            margin-bottom: 4px;
-        }
-
-        /* ===== PLACEHOLDER ===== */
-        .placeholder-note {
-            font-size: 11px;
-            color: var(--text-dim);
-            font-style: italic;
-            margin-top: 16px;
-            opacity: 0.6;
+        .contact-block .cb-value {
+            font-family: var(--hand);
+            font-size: 20px;
+            color: var(--accent3);
+            margin-top: 4px;
         }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            header { grid-template-columns: 1fr; padding: 40px 20px 30px; }
-            header .header-right { text-align: left; }
-            .zine-grid { grid-template-columns: 1fr; }
-            .content { padding: 30px 20px 60px; }
-            nav { padding: 0 20px; }
-            .comm-grid { grid-template-columns: 1fr; }
-            .contact-row { flex-direction: column; }
+            .panels { grid-template-columns: 1fr; }
+            .cover h1 { font-size: 50px; }
+            .comm-stickers { justify-content: center; }
+            .contact-blocks { flex-direction: column; }
         }
-
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--border); }
     </style>
 </head>
 <body>
 
-<button class="lang-switch" onclick="toggleLang()">EN / PT</button>
+<div class="cover">
+    <button class="lang-btn" onclick="toggleLang()">EN/PT</button>
+    <div class="issue">#01</div>
+    <h1>anna</h1>
+    <div class="subtitle" data-en="a devops engineer zine" data-pt="uma zine de devops engineer">a devops engineer zine</div>
+</div>
 
-<header>
-    <h1>
-        anna
-        <span>devops engineer</span>
-    </h1>
-    <div class="header-right">
-        <a href="https://github.com/annalaudaress" target="_blank">github</a><br>
-        <a href="https://linkedin.com/in/SEU-LINKEDIN" target="_blank">linkedin</a><br>
-        <span style="color:var(--text-dim)">brazil · 2023–present</span>
-    </div>
-</header>
-
-<nav>
+<div class="nav-strip">
     <button class="active" onclick="show('about')" data-p="about">ABOUT</button>
     <button onclick="show('certs')" data-p="certs">CERTS</button>
     <button onclick="show('projects')" data-p="projects">PROJECTS</button>
@@ -448,187 +455,171 @@
     <button onclick="show('talks')" data-p="talks">TALKS</button>
     <button onclick="show('community')" data-p="community">COMMUNITY</button>
     <button onclick="show('contact')" data-p="contact">CONTACT</button>
-</nav>
+</div>
 
-<div class="content">
+<div class="page">
 
     <!-- ABOUT -->
     <div class="panel active" id="p-about">
-        <div class="zine-grid">
-            <div class="zine-block" data-label="bio">
-                <p data-en="DevOps Engineer focused on security, networking, and cloud infrastructure automation. Working with AWS and Azure, Terraform at scale, GitOps (ArgoCD), Kubernetes (EKS), and multi-account IAM management." data-pt="Engenheira DevOps focada em segurança, redes e automação de infraestrutura cloud. Trabalho com AWS e Azure, Terraform em escala, GitOps (ArgoCD), Kubernetes (EKS) e gestão IAM multi-account.">DevOps Engineer focused on security, networking, and cloud infrastructure automation. Working with AWS and Azure, Terraform at scale, GitOps (ArgoCD), Kubernetes (EKS), and multi-account IAM management.</p>
-                <p style="margin-top:10px;color:var(--accent);font-family:var(--mono);font-size:11px" data-en="Speaker · Mentor · Community organizer" data-pt="Speaker · Mentora · Organizadora de comunidade">Speaker · Mentor · Community organizer</p>
+        <div class="panels">
+            <div class="comic-panel tilt-l">
+                <span class="panel-label">who?</span>
+                <div class="bubble" data-en="Hi! I'm Anna, DevOps Engineer from Brazil 🇧🇷" data-pt="Oi! Sou a Anna, DevOps Engineer do Brasil 🇧🇷">Hi! I'm Anna, DevOps Engineer from Brazil 🇧🇷</div>
+                <p class="small" style="margin-top:10px" data-en="focused on: security · networking · platform engineering" data-pt="foco em: segurança · redes · platform engineering">focused on: security · networking · platform engineering</p>
             </div>
-            <div class="zine-block" data-label="stack">
-                <div class="tags">
-                    <span class="tag">AWS</span>
-                    <span class="tag">Azure</span>
-                    <span class="tag">Terraform</span>
-                    <span class="tag">Kubernetes</span>
-                    <span class="tag">ArgoCD</span>
-                    <span class="tag">Docker</span>
-                    <span class="tag">GitHub Actions</span>
-                    <span class="tag">Azure DevOps</span>
-                    <span class="tag">EKS</span>
-                    <span class="tag">IAM / IRSA</span>
-                    <span class="tag">Helm</span>
-                    <span class="tag">Linux</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Networking</span>
-                    <span class="tag">Security</span>
+            <div class="comic-panel tilt-r">
+                <span class="panel-label">what i do</span>
+                <p data-en="I automate infrastructure, secure cloud accounts, build platforms, and break (then fix) things in production." data-pt="Automatizo infraestrutura, protejo contas cloud, construo plataformas, e quebro (depois conserto) coisas em produção.">I automate infrastructure, secure cloud accounts, build platforms, and break (then fix) things in production.</p>
+            </div>
+            <div class="comic-panel wide">
+                <span class="panel-label">stack</span>
+                <div class="stickers">
+                    <span class="sticker sticker-1">AWS</span>
+                    <span class="sticker sticker-2">Azure</span>
+                    <span class="sticker sticker-3">Terraform</span>
+                    <span class="sticker sticker-4">Kubernetes</span>
+                    <span class="sticker sticker-1">ArgoCD</span>
+                    <span class="sticker sticker-2">Docker</span>
+                    <span class="sticker sticker-3">GitHub Actions</span>
+                    <span class="sticker sticker-5">Azure DevOps</span>
+                    <span class="sticker sticker-4">EKS</span>
+                    <span class="sticker sticker-1">IAM/IRSA</span>
+                    <span class="sticker sticker-2">Helm</span>
+                    <span class="sticker sticker-3">Linux</span>
+                    <span class="sticker sticker-5">Python</span>
+                    <span class="sticker sticker-4">Security</span>
+                    <span class="sticker sticker-1">Networking</span>
                 </div>
             </div>
-            <div class="zine-block full" data-label="experience">
-                <div class="exp-entry">
-                    <div class="period">2025 – present</div>
-                    <div class="title">DevOps Engineer</div>
-                    <div class="desc" data-en="Terraform at scale (modules, workspaces, env0) · IAM/IRSA cross-account · EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Production troubleshooting · Mentoring · IDP contribution" data-pt="Terraform em escala (modules, workspaces, env0) · IAM/IRSA cross-account · EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Troubleshooting de produção · Mentoria · Contribuição em IDP">Terraform at scale (modules, workspaces, env0) · IAM/IRSA cross-account · EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Production troubleshooting · Mentoring · IDP contribution</div>
-                </div>
-                <div class="exp-entry">
-                    <div class="period">2023 – 2025</div>
-                    <div class="title">DevOps Engineer</div>
-                    <div class="desc" data-en="ArgoCD migration across 4 environments · GitOps · Kubernetes · CI/CD pipelines · Azure DevOps · Docker · Infrastructure automation" data-pt="Migração ArgoCD em 4 ambientes · GitOps · Kubernetes · CI/CD pipelines · Azure DevOps · Docker · Automação de infraestrutura">ArgoCD migration across 4 environments · GitOps · Kubernetes · CI/CD pipelines · Azure DevOps · Docker · Infrastructure automation</div>
-                </div>
+        </div>
+
+        <div style="margin-top:24px">
+            <div class="exp-block">
+                <div class="exp-date">2025 – PRESENT</div>
+                <div class="exp-title">DevOps Engineer</div>
+                <div class="exp-desc" data-en="Terraform at scale · IAM/IRSA cross-account · EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Production troubleshooting · Mentoring · IDP" data-pt="Terraform em escala · IAM/IRSA cross-account · EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Troubleshooting de produção · Mentoria · IDP">Terraform at scale · IAM/IRSA cross-account · EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Production troubleshooting · Mentoring · IDP</div>
+            </div>
+            <div class="exp-block">
+                <div class="exp-date">2023 – 2025</div>
+                <div class="exp-title">DevOps Engineer</div>
+                <div class="exp-desc" data-en="ArgoCD migration (4 envs) · GitOps · Kubernetes · CI/CD · Azure DevOps · Docker" data-pt="Migração ArgoCD (4 ambientes) · GitOps · Kubernetes · CI/CD · Azure DevOps · Docker">ArgoCD migration (4 envs) · GitOps · Kubernetes · CI/CD · Azure DevOps · Docker</div>
             </div>
         </div>
     </div>
 
     <!-- CERTS -->
     <div class="panel" id="p-certs">
-        <div class="cert-list">
-            <div class="cert-row earned"><span class="cert-status">◆</span><span class="cert-name">AWS Cloud Practitioner</span><span class="cert-issuer">AWS</span></div>
-            <div class="cert-row earned"><span class="cert-status">◆</span><span class="cert-name">AWS FinOps Practitioner</span><span class="cert-issuer">AWS</span></div>
-            <div class="cert-row"><span class="cert-status">◇</span><span class="cert-name">AWS AI Practitioner</span><span class="cert-issuer">AWS</span></div>
-            <div class="cert-row"><span class="cert-status">◇</span><span class="cert-name">AWS Solutions Architect Associate</span><span class="cert-issuer">AWS</span></div>
-            <div class="cert-row"><span class="cert-status">◇</span><span class="cert-name">CKAD</span><span class="cert-issuer">CNCF</span></div>
-            <div class="cert-row"><span class="cert-status">◇</span><span class="cert-name">AWS CloudOps / SysOps</span><span class="cert-issuer">AWS</span></div>
-            <div class="cert-row"><span class="cert-status">◇</span><span class="cert-name">AWS Developer Associate</span><span class="cert-issuer">AWS</span></div>
-            <div class="cert-row"><span class="cert-status">◇</span><span class="cert-name">Azure Fundamentals (AZ-900)</span><span class="cert-issuer">Microsoft</span></div>
-            <div class="cert-row"><span class="cert-status">◇</span><span class="cert-name">CCST Cybersecurity</span><span class="cert-issuer">Cisco</span></div>
+        <div class="comic-panel wide" style="margin-bottom:20px">
+            <span class="panel-label" data-en="badges collected" data-pt="badges coletadas">badges collected</span>
+            <div class="cert-entry done"><div class="cert-dot"></div><div class="cert-name">AWS Cloud Practitioner</div><div class="cert-from">AWS</div></div>
+            <div class="cert-entry done"><div class="cert-dot"></div><div class="cert-name">AWS FinOps Practitioner</div><div class="cert-from">AWS</div></div>
+            <div class="cert-entry"><div class="cert-dot"></div><div class="cert-name">AWS AI Practitioner</div><div class="cert-from">AWS</div></div>
+            <div class="cert-entry"><div class="cert-dot"></div><div class="cert-name">AWS Solutions Architect Associate</div><div class="cert-from">AWS</div></div>
+            <div class="cert-entry"><div class="cert-dot"></div><div class="cert-name">CKAD</div><div class="cert-from">CNCF</div></div>
+            <div class="cert-entry"><div class="cert-dot"></div><div class="cert-name">AWS CloudOps / SysOps</div><div class="cert-from">AWS</div></div>
+            <div class="cert-entry"><div class="cert-dot"></div><div class="cert-name">AWS Developer Associate</div><div class="cert-from">AWS</div></div>
+            <div class="cert-entry"><div class="cert-dot"></div><div class="cert-name">Azure Fundamentals (AZ-900)</div><div class="cert-from">Microsoft</div></div>
+            <div class="cert-entry"><div class="cert-dot"></div><div class="cert-name">CCST Cybersecurity</div><div class="cert-from">Cisco</div></div>
         </div>
     </div>
 
     <!-- PROJECTS -->
     <div class="panel" id="p-projects">
-        <div class="project-item">
-            <div class="proj-title">carbon-lens</div>
-            <div class="proj-desc" data-en="CLI/Web tool for carbon footprint visibility in AWS infrastructure. Terminal UI, cost × CO₂ correlation, green optimization." data-pt="Ferramenta CLI/Web para visibilidade de pegada de carbono em infra AWS. UI terminal, correlação custo × CO₂, otimização verde.">CLI/Web tool for carbon footprint visibility in AWS infrastructure. Terminal UI, cost × CO₂ correlation, green optimization.</div>
-            <div class="tags"><span class="tag">GreenOps</span><span class="tag">AWS</span><span class="tag">TypeScript</span></div>
-            <a href="https://annalaudaress.github.io/carbon-lens/" target="_blank">→ live</a>
+        <div class="proj-card">
+            <div class="proj-name">🌿 carbon-lens</div>
+            <div class="proj-desc" data-en="Carbon footprint visibility for AWS infra. Terminal UI, cost × CO₂, green optimization." data-pt="Visibilidade de pegada de carbono pra infra AWS. UI terminal, custo × CO₂, otimização verde.">Carbon footprint visibility for AWS infra. Terminal UI, cost × CO₂, green optimization.</div>
+            <div class="stickers"><span class="sticker sticker-4">GreenOps</span><span class="sticker sticker-2">AWS</span><span class="sticker sticker-3">TypeScript</span></div>
+            <a href="https://annalaudaress.github.io/carbon-lens/" target="_blank">→ live demo</a>
         </div>
-        <div class="project-item">
-            <div class="proj-title">lacrei-saude-api</div>
-            <div class="proj-desc" data-en="DevSecOps challenge — containerized API with Dockerfile hardening and security best practices." data-pt="Desafio DevSecOps — API containerizada com hardening de Dockerfile e boas práticas de segurança.">DevSecOps challenge — containerized API with Dockerfile hardening and security best practices.</div>
-            <div class="tags"><span class="tag">Docker</span><span class="tag">DevSecOps</span></div>
+        <div class="proj-card">
+            <div class="proj-name">🔐 lacrei-saude-api</div>
+            <div class="proj-desc" data-en="DevSecOps challenge — containerized API, Dockerfile hardening, security." data-pt="Desafio DevSecOps — API containerizada, hardening de Dockerfile, segurança.">DevSecOps challenge — containerized API, Dockerfile hardening, security.</div>
+            <div class="stickers"><span class="sticker sticker-1">Docker</span><span class="sticker sticker-5">DevSecOps</span></div>
             <a href="https://github.com/annalaudaress/lacrei-saude-api" target="_blank">→ repo</a>
         </div>
-        <div class="project-item">
-            <div class="proj-title">Projeto-Avanti</div>
-            <div class="proj-desc" data-en="Infrastructure as Code with Terraform — cloud provisioning and management." data-pt="Infrastructure as Code com Terraform — provisionamento e gestão cloud.">Infrastructure as Code with Terraform — cloud provisioning and management.</div>
-            <div class="tags"><span class="tag">Terraform</span><span class="tag">HCL</span></div>
+        <div class="proj-card">
+            <div class="proj-name">🏗️ Projeto-Avanti</div>
+            <div class="proj-desc" data-en="IaC with Terraform — cloud provisioning." data-pt="IaC com Terraform — provisionamento cloud.">IaC with Terraform — cloud provisioning.</div>
+            <div class="stickers"><span class="sticker sticker-3">Terraform</span><span class="sticker sticker-2">HCL</span></div>
             <a href="https://github.com/annalaudaress/Projeto-Avanti" target="_blank">→ repo</a>
         </div>
-        <div class="project-item">
-            <div class="proj-title">inovatech</div>
-            <div class="proj-desc" data-en="Docker + Terraform infrastructure project." data-pt="Projeto de infraestrutura Docker + Terraform.">Docker + Terraform infrastructure project.</div>
-            <div class="tags"><span class="tag">Docker</span><span class="tag">Terraform</span></div>
+        <div class="proj-card">
+            <div class="proj-name">🐳 inovatech</div>
+            <div class="proj-desc" data-en="Docker + Terraform infra project." data-pt="Projeto infra Docker + Terraform.">Docker + Terraform infra project.</div>
+            <div class="stickers"><span class="sticker sticker-1">Docker</span><span class="sticker sticker-3">Terraform</span></div>
             <a href="https://github.com/annalaudaress/inovatech" target="_blank">→ repo</a>
         </div>
     </div>
 
     <!-- WRITING -->
     <div class="panel" id="p-writing">
-        <div class="entry-card">
-            <div class="entry-meta">MONTH/YEAR · PLATFORM</div>
-            <div class="entry-title">ARTICLE TITLE</div>
-            <div class="entry-desc">Brief description of the article.</div>
+        <div class="zine-entry">
+            <div class="ze-meta">MONTH/YEAR · PLATFORM</div>
+            <div class="ze-title">Article Title</div>
+            <div class="ze-desc">Brief description.</div>
             <a href="#">→ read</a>
         </div>
-        <p class="placeholder-note" data-en="// add your articles here" data-pt="// adicione seus artigos aqui">// add your articles here</p>
+        <p style="font-family:var(--hand);font-size:18px;color:#666;margin-top:16px" data-en="✏️ more articles coming soon..." data-pt="✏️ mais artigos em breve...">✏️ more articles coming soon...</p>
     </div>
 
     <!-- TALKS -->
     <div class="panel" id="p-talks">
-        <div class="entry-card">
-            <div class="entry-meta">EVENT · MONTH/YEAR</div>
-            <div class="entry-title">TALK TITLE</div>
-            <div class="entry-desc">Talk description.</div>
+        <div class="zine-entry">
+            <div class="ze-meta">EVENT · MONTH/YEAR</div>
+            <div class="ze-title">Talk Title</div>
+            <div class="ze-desc">Description.</div>
             <a href="#">→ slides</a>
         </div>
-        <p class="placeholder-note" data-en="// add your talks here" data-pt="// adicione suas talks aqui">// add your talks here</p>
+        <p style="font-family:var(--hand);font-size:18px;color:#666;margin-top:16px" data-en="🎤 more talks coming soon..." data-pt="🎤 mais talks em breve...">🎤 more talks coming soon...</p>
     </div>
 
     <!-- COMMUNITY -->
     <div class="panel" id="p-community">
-        <div class="comm-grid">
-            <div class="comm-item">
-                <div class="comm-role" data-en="Organizer" data-pt="Organizadora">Organizer</div>
-                <div class="comm-org">DevOpsDays BH</div>
-            </div>
-            <div class="comm-item">
-                <div class="comm-role" data-en="Organizer" data-pt="Organizadora">Organizer</div>
-                <div class="comm-org">Python Sudeste</div>
-            </div>
-            <div class="comm-item">
-                <div class="comm-role">Ambassador</div>
-                <div class="comm-org">Google Students</div>
-            </div>
-            <div class="comm-item">
-                <div class="comm-role">Speaker</div>
-                <div class="comm-org" data-en="Tech events" data-pt="Eventos tech">Tech events</div>
-            </div>
-            <div class="comm-item">
-                <div class="comm-role" data-en="Mentor" data-pt="Mentora">Mentor</div>
-                <div class="comm-org">DevOps / Cloud</div>
-            </div>
+        <div class="comm-stickers">
+            <div class="comm-badge"><div class="cb-role" data-en="Organizer" data-pt="Organizadora">Organizer</div><div class="cb-org">DevOpsDays BH</div></div>
+            <div class="comm-badge"><div class="cb-role" data-en="Organizer" data-pt="Organizadora">Organizer</div><div class="cb-org">Python Sudeste</div></div>
+            <div class="comm-badge"><div class="cb-role">Ambassador</div><div class="cb-org">Google Students</div></div>
+            <div class="comm-badge"><div class="cb-role">Speaker</div><div class="cb-org" data-en="Tech Events" data-pt="Eventos Tech">Tech Events</div></div>
+            <div class="comm-badge"><div class="cb-role" data-en="Mentor" data-pt="Mentora">Mentor</div><div class="cb-org">DevOps / Cloud</div></div>
         </div>
     </div>
 
     <!-- CONTACT -->
     <div class="panel" id="p-contact">
-        <div class="contact-row">
-            <a class="contact-link" href="https://github.com/annalaudaress" target="_blank">
-                <div class="cl-label">GitHub</div>
-                annalaudaress
-            </a>
-            <a class="contact-link" href="https://linkedin.com/in/SEU-LINKEDIN" target="_blank">
-                <div class="cl-label">LinkedIn</div>
-                SEU-LINKEDIN
-            </a>
-            <a class="contact-link" href="mailto:SEU-EMAIL">
-                <div class="cl-label">Email</div>
-                SEU-EMAIL
-            </a>
+        <div class="comic-panel wide">
+            <span class="panel-label" data-en="find me" data-pt="me encontre">find me</span>
+            <div class="contact-blocks" style="margin-top:10px">
+                <a class="contact-block" href="https://github.com/annalaudaress" target="_blank">
+                    <div class="cb-label">GitHub</div><div class="cb-value">annalaudaress</div>
+                </a>
+                <a class="contact-block" href="https://linkedin.com/in/SEU-LINKEDIN" target="_blank">
+                    <div class="cb-label">LinkedIn</div><div class="cb-value">SEU-LINKEDIN</div>
+                </a>
+                <a class="contact-block" href="mailto:SEU-EMAIL">
+                    <div class="cb-label">Email</div><div class="cb-value">SEU-EMAIL</div>
+                </a>
+            </div>
+            <p style="font-family:var(--hand);font-size:20px;color:var(--accent2);margin-top:18px" data-en="✨ open to talks, podcasts, collabs & opportunities!" data-pt="✨ aberta a palestras, podcasts, collabs & oportunidades!">✨ open to talks, podcasts, collabs & opportunities!</p>
         </div>
-        <p style="margin-top:24px;font-size:12px;color:var(--text-dim)" data-en="Open to talks, podcasts, open-source collabs, and opportunities." data-pt="Aberta a palestras, podcasts, collabs open-source e oportunidades.">Open to talks, podcasts, open-source collabs, and opportunities.</p>
     </div>
 
 </div>
 
 <script>
     let lang = 'en';
-
     function show(name) {
         document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.nav-strip button').forEach(b => b.classList.remove('active'));
         document.getElementById('p-' + name).classList.add('active');
         document.querySelector(`[data-p="${name}"]`).classList.add('active');
     }
-
     function toggleLang() {
         lang = lang === 'en' ? 'pt' : 'en';
-        document.querySelectorAll('[data-en][data-pt]').forEach(el => {
-            el.innerHTML = el.getAttribute('data-' + lang);
-        });
+        document.querySelectorAll('[data-en][data-pt]').forEach(el => { el.innerHTML = el.getAttribute('data-' + lang); });
         localStorage.setItem('lang', lang);
     }
-
-    (function() {
-        const s = localStorage.getItem('lang');
-        if (s === 'pt') { lang = 'en'; toggleLang(); }
-    })();
-
-    document.addEventListener('keydown', (e) => {
+    (function() { if (localStorage.getItem('lang') === 'pt') { lang = 'en'; toggleLang(); } })();
+    document.addEventListener('keydown', e => {
         const p = ['about','certs','projects','writing','talks','community','contact'];
         const n = parseInt(e.key);
         if (n >= 1 && n <= 7) show(p[n-1]);
