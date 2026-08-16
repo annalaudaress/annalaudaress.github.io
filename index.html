@@ -1,33 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anna | DevOps Engineer</title>
-    <meta name="description" content="Anna — DevOps Engineer. AWS, Kubernetes, Terraform, Security, Platform Engineering.">
+    <meta name="description" content="Anna — DevOps Engineer. AWS, Azure, Kubernetes, Terraform, Security, Platform Engineering.">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
             --bg-primary: #0a0a0a;
             --bg-secondary: #131313;
-            --bg-tertiary: #0f0f0f;
             --border: #222222;
-            --border-hover: #333333;
+            --border-hover: #333;
             --text-primary: #e0e0e0;
-            --text-secondary: #666666;
+            --text-secondary: #666;
             --accent-blue: #7aa2f7;
             --accent-green: #9ece6a;
             --accent-yellow: #e0af68;
-            --accent-red: #f7768e;
             --accent-purple: #bb9af7;
             --accent-cyan: #7dcfff;
             --accent-orange: #ff9e64;
             --k9s-header: #141414;
         }
-
         body {
             font-family: 'JetBrains Mono', monospace;
             background: var(--bg-primary);
@@ -37,8 +32,7 @@
             line-height: 1.6;
             padding-bottom: 40px;
         }
-
-        /* ===== TOP BAR ===== */
+        /* TOPBAR */
         .topbar {
             background: var(--bg-secondary);
             border-bottom: 1px solid var(--border);
@@ -50,391 +44,174 @@
             top: 0;
             z-index: 100;
         }
-
-        .topbar .left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .topbar .logo {
-            color: var(--accent-green);
-            font-weight: 700;
-            font-size: 15px;
-        }
-
+        .topbar .left { display: flex; align-items: center; gap: 14px; }
+        .topbar .logo { color: var(--accent-green); font-weight: 700; font-size: 15px; }
         .topbar .separator { color: var(--border); }
-
-        .topbar .ctx {
-            color: var(--text-secondary);
-            font-size: 11px;
-        }
-
-        .topbar .right {
-            display: flex;
-            gap: 16px;
-            font-size: 11px;
-        }
-
-        .topbar .right a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
+        .topbar .ctx { color: var(--text-secondary); font-size: 11px; }
+        .topbar .right { display: flex; gap: 12px; font-size: 11px; align-items: center; }
+        .topbar .right a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
         .topbar .right a:hover { color: var(--accent-cyan); }
-
-        /* ===== NAV ===== */
+        .lang-toggle {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 3px 8px;
+            font-family: inherit;
+            font-size: 10px;
+            color: var(--accent-yellow);
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .lang-toggle:hover { border-color: var(--accent-yellow); }
+        /* NAV */
         .nav {
             background: var(--k9s-header);
             border-bottom: 1px solid var(--border);
             display: flex;
             overflow-x: auto;
         }
-
         .nav button {
-            background: none;
-            border: none;
-            font-family: inherit;
-            font-size: 12px;
-            padding: 11px 20px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            white-space: nowrap;
-            transition: all 0.2s;
+            background: none; border: none; font-family: inherit; font-size: 12px;
+            padding: 11px 18px; color: var(--text-secondary); cursor: pointer;
+            border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.2s;
         }
-
-        .nav button:hover {
-            color: var(--text-primary);
-            background: rgba(122, 162, 247, 0.03);
-        }
-
-        .nav button.active {
-            color: var(--accent-blue);
-            border-bottom-color: var(--accent-blue);
-        }
-
-        .nav button .key {
-            color: var(--accent-yellow);
-            font-size: 10px;
-            margin-left: 5px;
-        }
-
-        /* ===== MAIN ===== */
-        .main {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
+        .nav button:hover { color: var(--text-primary); }
+        .nav button.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+        .nav button .key { color: var(--accent-yellow); font-size: 10px; margin-left: 4px; }
+        /* MAIN */
+        .main { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
         .panel { display: none; animation: fadeIn 0.3s ease; }
         .panel.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            display: flex;
-            gap: 28px;
-            align-items: flex-start;
-            margin-bottom: 30px;
-        }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        /* HERO */
+        .hero { display: flex; gap: 28px; align-items: flex-start; margin-bottom: 28px; }
         .hero-avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 6px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            color: var(--accent-blue);
-            flex-shrink: 0;
+            width: 90px; height: 90px; border-radius: 6px; background: var(--bg-secondary);
+            border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+            font-size: 36px; color: var(--accent-blue); flex-shrink: 0;
         }
-
-        .hero-info h1 {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 3px;
-        }
-
-        .hero-info .role {
-            color: var(--accent-green);
-            font-size: 13px;
-            margin-bottom: 10px;
-        }
-
-        .hero-info .bio {
-            color: var(--text-secondary);
-            font-size: 12px;
-            line-height: 1.8;
-            max-width: 580px;
-        }
-
-        .hero-links {
-            display: flex;
-            gap: 10px;
-            margin-top: 14px;
-            flex-wrap: wrap;
-        }
-
+        .hero-info h1 { font-size: 20px; font-weight: 700; margin-bottom: 3px; }
+        .hero-info .role { color: var(--accent-green); font-size: 13px; margin-bottom: 10px; }
+        .hero-info .bio { color: var(--text-secondary); font-size: 12px; line-height: 1.8; max-width: 580px; }
+        .hero-links { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
         .hero-links a {
-            color: var(--accent-cyan);
-            text-decoration: none;
-            font-size: 11px;
-            padding: 5px 12px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            transition: all 0.2s;
+            color: var(--accent-cyan); text-decoration: none; font-size: 11px;
+            padding: 5px 12px; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s;
         }
-
-        .hero-links a:hover {
-            border-color: var(--accent-cyan);
-            background: rgba(125, 207, 255, 0.04);
-        }
-
-        /* ===== SECTION TITLE ===== */
+        .hero-links a:hover { border-color: var(--accent-cyan); background: rgba(125,207,255,0.04); }
+        /* SECTIONS */
         .section-title {
-            color: var(--accent-cyan);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 14px;
-            margin-top: 30px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid var(--border);
+            color: var(--accent-cyan); font-size: 11px; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 14px; margin-top: 28px;
+            padding-bottom: 6px; border-bottom: 1px solid var(--border);
         }
-
         .section-title:first-child { margin-top: 0; }
-
-        /* ===== STACK ===== */
-        .stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
+        /* STACK */
+        .stack { display: flex; flex-wrap: wrap; gap: 8px; }
         .stack-item {
-            padding: 5px 12px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 11px;
-            color: var(--text-primary);
-            transition: border-color 0.2s;
+            padding: 5px 12px; background: var(--bg-secondary); border: 1px solid var(--border);
+            border-radius: 4px; font-size: 11px; transition: border-color 0.2s;
         }
-
         .stack-item:hover { border-color: var(--border-hover); }
-
-        /* ===== EXPERIENCE ===== */
-        .exp-item {
-            border-left: 2px solid var(--border);
-            padding-left: 18px;
-            margin-bottom: 22px;
-            position: relative;
-        }
-
+        /* EXPERIENCE */
+        .exp-item { border-left: 2px solid var(--border); padding-left: 18px; margin-bottom: 20px; position: relative; }
         .exp-item::before {
-            content: '';
-            position: absolute;
-            left: -5px;
-            top: 4px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent-blue);
+            content: ''; position: absolute; left: -5px; top: 4px;
+            width: 8px; height: 8px; border-radius: 50%; background: var(--accent-blue);
         }
-
-        .exp-item.current::before {
-            background: var(--accent-green);
-            box-shadow: 0 0 6px rgba(158, 206, 106, 0.3);
-        }
-
+        .exp-item.current::before { background: var(--accent-green); box-shadow: 0 0 6px rgba(158,206,106,0.3); }
         .exp-item .exp-period { font-size: 10px; color: var(--accent-yellow); }
-        .exp-item .exp-role { font-size: 13px; font-weight: 600; color: var(--text-primary); margin: 3px 0; }
+        .exp-item .exp-role { font-size: 13px; font-weight: 600; margin: 3px 0; }
         .exp-item .exp-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.7; }
-
-        /* ===== CERTS ===== */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
-        }
-
+        /* CERTS */
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
         .cert-item {
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 14px;
-            background: var(--bg-secondary);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: border-color 0.2s;
+            border: 1px solid var(--border); border-radius: 6px; padding: 14px;
+            background: var(--bg-secondary); display: flex; align-items: center; gap: 12px; transition: border-color 0.2s;
         }
-
         .cert-item:hover { border-color: var(--accent-yellow); }
-
-        .cert-item .cert-icon {
-            font-size: 22px;
-            flex-shrink: 0;
+        .cert-item .cert-icon { font-size: 20px; flex-shrink: 0; }
+        .cert-item .cert-name { font-size: 12px; font-weight: 500; }
+        .cert-item .cert-issuer { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
+        .cert-item.earned { border-color: var(--accent-green); background: rgba(158,206,106,0.03); }
+        .cert-item .cert-badge { font-size: 10px; color: var(--accent-green); margin-left: auto; }
+        /* PROJECTS */
+        .project-card {
+            border: 1px solid var(--border); border-radius: 6px; padding: 16px;
+            margin-bottom: 12px; background: var(--bg-secondary); transition: border-color 0.2s;
         }
-
-        .cert-item .cert-info .cert-name {
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .cert-item .cert-info .cert-issuer {
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        .cert-item.earned {
-            border-color: var(--accent-green);
-            background: rgba(158, 206, 106, 0.03);
-        }
-
-        .cert-item.earned .cert-badge {
-            font-size: 10px;
-            color: var(--accent-green);
-            margin-left: auto;
-        }
-
-        /* ===== ARTICLES ===== */
+        .project-card:hover { border-color: var(--accent-green); }
+        .project-card .proj-name { font-size: 13px; font-weight: 600; color: var(--accent-green); margin-bottom: 4px; }
+        .project-card .proj-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px; }
+        .project-card .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag { padding: 2px 8px; border-radius: 3px; font-size: 10px; background: rgba(122,162,247,0.08); color: var(--accent-blue); }
+        .project-card .proj-link { display: inline-block; margin-top: 8px; font-size: 11px; color: var(--accent-cyan); text-decoration: none; }
+        .project-card .proj-link:hover { text-decoration: underline; }
+        /* ARTICLES */
         .article-card {
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
-            background: var(--bg-secondary);
-            transition: border-color 0.2s, transform 0.2s;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
+            border: 1px solid var(--border); border-radius: 6px; padding: 16px;
+            margin-bottom: 12px; background: var(--bg-secondary); transition: all 0.2s;
+            text-decoration: none; display: block;
         }
-
-        .article-card:hover {
-            border-color: var(--accent-blue);
-            transform: translateX(3px);
-        }
-
-        .article-card .article-date { font-size: 10px; color: var(--accent-yellow); margin-bottom: 5px; }
-        .article-card .article-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 5px; }
-        .article-card .article-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.6; }
-
-        .article-card .article-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
-        .article-tag { padding: 2px 8px; border-radius: 3px; font-size: 10px; background: rgba(122, 162, 247, 0.08); color: var(--accent-blue); }
-
-        /* ===== TALKS ===== */
+        .article-card:hover { border-color: var(--accent-blue); transform: translateX(3px); }
+        .article-card .article-date { font-size: 10px; color: var(--accent-yellow); margin-bottom: 4px; }
+        .article-card .article-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .article-card .article-desc { font-size: 11px; color: var(--text-secondary); }
+        .article-card .article-tags { display: flex; gap: 6px; margin-top: 8px; }
+        /* TALKS */
         .talk-card {
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
-            background: var(--bg-secondary);
-            transition: border-color 0.2s;
+            border: 1px solid var(--border); border-radius: 6px; padding: 16px;
+            margin-bottom: 12px; background: var(--bg-secondary); transition: border-color 0.2s;
         }
-
         .talk-card:hover { border-color: var(--accent-purple); }
-
         .talk-card .talk-event { font-size: 10px; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-        .talk-card .talk-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .talk-card .talk-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
         .talk-card .talk-meta { font-size: 11px; color: var(--text-secondary); display: flex; gap: 16px; margin-bottom: 6px; }
         .talk-card .talk-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.6; }
         .talk-card .talk-link { display: inline-block; margin-top: 8px; font-size: 11px; color: var(--accent-cyan); text-decoration: none; }
         .talk-card .talk-link:hover { text-decoration: underline; }
-
-        /* ===== COMMUNITY ===== */
-        .community-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 12px;
-        }
-
+        /* COMMUNITY */
+        .community-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
         .community-card {
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 16px;
-            background: var(--bg-secondary);
-            transition: border-color 0.2s;
+            border: 1px solid var(--border); border-radius: 6px; padding: 16px;
+            background: var(--bg-secondary); transition: border-color 0.2s;
         }
-
         .community-card:hover { border-color: var(--accent-green); }
-
-        .community-card .comm-icon { font-size: 20px; margin-bottom: 8px; }
-        .community-card .comm-title { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .community-card .comm-icon { font-size: 18px; margin-bottom: 8px; }
+        .community-card .comm-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
         .community-card .comm-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.6; }
-
-        /* ===== PROJECTS ===== */
-        .project-card {
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
-            background: var(--bg-secondary);
-            transition: border-color 0.2s;
-        }
-
-        .project-card:hover { border-color: var(--accent-green); }
-
-        .project-card .proj-name { font-size: 13px; font-weight: 600; color: var(--accent-green); margin-bottom: 4px; }
-        .project-card .proj-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px; }
-        .project-card .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-        .project-card .proj-link { display: inline-block; margin-top: 8px; font-size: 11px; color: var(--accent-cyan); text-decoration: none; }
-        .project-card .proj-link:hover { text-decoration: underline; }
-
-        /* ===== CONTACT ===== */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 12px;
-        }
-
+        /* CONTACT */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
         .contact-item {
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 16px;
-            background: var(--bg-secondary);
-            text-align: center;
-            transition: border-color 0.2s;
-            text-decoration: none;
-            display: block;
+            border: 1px solid var(--border); border-radius: 6px; padding: 16px;
+            background: var(--bg-secondary); text-align: center; transition: border-color 0.2s;
+            text-decoration: none; display: block;
         }
-
         .contact-item:hover { border-color: var(--accent-cyan); }
-        .contact-item .contact-icon { font-size: 20px; margin-bottom: 8px; }
-        .contact-item .contact-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
-        .contact-item .contact-value { font-size: 12px; color: var(--accent-cyan); }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 6px 16px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            z-index: 100;
+        .contact-item .contact-icon { font-size: 18px; margin-bottom: 6px; }
+        .contact-item .contact-label { font-size: 10px; color: var(--text-secondary); margin-bottom: 3px; }
+        .contact-item .contact-value { font-size: 11px; color: var(--accent-cyan); }
+        .open-to {
+            margin-top: 20px; padding: 16px; border: 1px solid var(--border);
+            border-radius: 6px; background: var(--bg-secondary);
+            color: var(--text-secondary); font-size: 12px; line-height: 1.8;
         }
-
+        .open-to strong { color: var(--accent-green); }
+        /* FOOTER */
+        .footer {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: var(--bg-secondary); border-top: 1px solid var(--border);
+            padding: 6px 16px; display: flex; justify-content: space-between;
+            font-size: 11px; z-index: 100;
+        }
         .footer .left-foot { color: var(--text-secondary); }
         .footer .left-foot kbd { color: var(--accent-yellow); font-family: inherit; }
         .footer .right-foot { color: var(--accent-green); }
-
-        /* ===== RESPONSIVE ===== */
+        /* PLACEHOLDER */
+        .placeholder {
+            margin-top: 14px; padding: 12px; border: 1px dashed var(--border);
+            border-radius: 6px; color: var(--text-secondary); font-size: 11px;
+        }
         @media (max-width: 768px) {
             .hero { flex-direction: column; align-items: center; text-align: center; }
             .hero-links { justify-content: center; }
@@ -442,7 +219,6 @@
             .main { padding: 20px 14px; }
             .footer .left-foot { display: none; }
         }
-
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -450,7 +226,6 @@
 </head>
 <body>
 
-    <!-- TOP BAR -->
     <div class="topbar">
         <div class="left">
             <div class="logo">annabuilds</div>
@@ -460,34 +235,31 @@
         <div class="right">
             <a href="https://github.com/annalaudaress" target="_blank">github</a>
             <a href="https://linkedin.com/in/SEU-LINKEDIN" target="_blank">linkedin</a>
+            <button class="lang-toggle" onclick="toggleLang()">EN / PT</button>
         </div>
     </div>
 
-    <!-- NAV -->
     <nav class="nav">
-        <button class="active" onclick="showPanel('about')" data-panel="about">Sobre<span class="key">:1</span></button>
-        <button onclick="showPanel('certs')" data-panel="certs">Certificações<span class="key">:2</span></button>
-        <button onclick="showPanel('projects')" data-panel="projects">Projetos<span class="key">:3</span></button>
-        <button onclick="showPanel('articles')" data-panel="articles">Artigos<span class="key">:4</span></button>
+        <button class="active" onclick="showPanel('about')" data-panel="about"><span data-en="About" data-pt="Sobre">About</span><span class="key">:1</span></button>
+        <button onclick="showPanel('certs')" data-panel="certs"><span data-en="Certs" data-pt="Certificações">Certs</span><span class="key">:2</span></button>
+        <button onclick="showPanel('projects')" data-panel="projects"><span data-en="Projects" data-pt="Projetos">Projects</span><span class="key">:3</span></button>
+        <button onclick="showPanel('articles')" data-panel="articles"><span data-en="Articles" data-pt="Artigos">Articles</span><span class="key">:4</span></button>
         <button onclick="showPanel('speaker')" data-panel="speaker">Speaker<span class="key">:5</span></button>
-        <button onclick="showPanel('community')" data-panel="community">Comunidade<span class="key">:6</span></button>
-        <button onclick="showPanel('contact')" data-panel="contact">Contato<span class="key">:7</span></button>
+        <button onclick="showPanel('community')" data-panel="community"><span data-en="Community" data-pt="Comunidade">Community</span><span class="key">:6</span></button>
+        <button onclick="showPanel('contact')" data-panel="contact"><span data-en="Contact" data-pt="Contato">Contact</span><span class="key">:7</span></button>
     </nav>
 
     <div class="main">
 
-        <!-- ===== SOBRE ===== -->
+        <!-- ABOUT -->
         <div class="panel active" id="panel-about">
             <div class="hero">
                 <div class="hero-avatar">A</div>
                 <div class="hero-info">
                     <h1>Anna</h1>
                     <div class="role">DevOps Engineer</div>
-                    <div class="bio">
-                        Engenheira DevOps focada em segurança, redes e automação de infraestrutura cloud.
-                        Experiência com AWS e Azure, Terraform em escala, GitOps (ArgoCD), Kubernetes (EKS),
-                        CI/CD pipelines e gestão de IAM multi-account.
-                        Speaker, mentora e membro ativo da comunidade tech.
+                    <div class="bio" data-en="DevOps Engineer focused on security, networking, and cloud infrastructure automation. Experience with AWS and Azure, Terraform at scale, GitOps (ArgoCD), Kubernetes (EKS), CI/CD pipelines, and multi-account IAM management. Speaker, mentor, and community organizer (DevOpsDays BH, Python Sudeste)." data-pt="Engenheira DevOps focada em segurança, redes e automação de infraestrutura cloud. Experiência com AWS e Azure, Terraform em escala, GitOps (ArgoCD), Kubernetes (EKS), CI/CD pipelines e gestão de IAM multi-account. Speaker, mentora e organizadora de comunidade (DevOpsDays BH, Python Sudeste).">
+                        DevOps Engineer focused on security, networking, and cloud infrastructure automation. Experience with AWS and Azure, Terraform at scale, GitOps (ArgoCD), Kubernetes (EKS), CI/CD pipelines, and multi-account IAM management. Speaker, mentor, and community organizer (DevOpsDays BH, Python Sudeste).
                     </div>
                     <div class="hero-links">
                         <a href="https://github.com/annalaudaress" target="_blank">⎈ GitHub</a>
@@ -496,7 +268,7 @@
                 </div>
             </div>
 
-            <div class="section-title">› Stack</div>
+            <div class="section-title" data-en="› Stack" data-pt="› Stack">› Stack</div>
             <div class="stack">
                 <span class="stack-item">AWS</span>
                 <span class="stack-item">Azure</span>
@@ -516,214 +288,195 @@
                 <span class="stack-item">env0</span>
             </div>
 
-            <div class="section-title">› Experiência</div>
+            <div class="section-title" data-en="› Experience" data-pt="› Experiência">› Experience</div>
 
             <div class="exp-item current">
-                <div class="exp-period">2025 – presente</div>
+                <div class="exp-period">2025 – present</div>
                 <div class="exp-role">DevOps Engineer</div>
-                <div class="exp-desc">
-                    Terraform em escala (modules, workspaces, env0) · IAM/IRSA cross-account ·
-                    EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Troubleshooting de produção ·
-                    Mentoria · Contribuição na construção de IDP
+                <div class="exp-desc" data-en="Terraform at scale (modules, workspaces, env0) · IAM/IRSA cross-account · EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Production troubleshooting · Mentoring · IDP contribution" data-pt="Terraform em escala (modules, workspaces, env0) · IAM/IRSA cross-account · EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Troubleshooting de produção · Mentoria · Contribuição em IDP">
+                    Terraform at scale (modules, workspaces, env0) · IAM/IRSA cross-account · EKS · ArgoCD multi-env · Lambdas + ECS via IaC · Production troubleshooting · Mentoring · IDP contribution
                 </div>
             </div>
 
             <div class="exp-item">
-                <div class="exp-period">Anterior</div>
+                <div class="exp-period">2023 – 2025</div>
                 <div class="exp-role">DevOps Engineer</div>
-                <div class="exp-desc">
-                    Migração ArgoCD 4 ambientes · GitOps · Kubernetes · CI/CD · Azure DevOps pipelines
+                <div class="exp-desc" data-en="ArgoCD migration across 4 environments · GitOps · Kubernetes · CI/CD pipelines · Azure DevOps · Docker · Infrastructure automation" data-pt="Migração ArgoCD em 4 ambientes · GitOps · Kubernetes · CI/CD pipelines · Azure DevOps · Docker · Automação de infraestrutura">
+                    ArgoCD migration across 4 environments · GitOps · Kubernetes · CI/CD pipelines · Azure DevOps · Docker · Infrastructure automation
                 </div>
             </div>
         </div>
 
-        <!-- ===== CERTIFICAÇÕES ===== -->
+        <!-- CERTS -->
         <div class="panel" id="panel-certs">
-            <div class="section-title">› Certificações conquistadas</div>
+            <div class="section-title" data-en="› Earned" data-pt="› Conquistadas">› Earned</div>
             <div class="cert-grid">
                 <div class="cert-item earned">
                     <div class="cert-icon">☁️</div>
-                    <div class="cert-info">
-                        <div class="cert-name">AWS Cloud Practitioner</div>
-                        <div class="cert-issuer">Amazon Web Services</div>
-                    </div>
+                    <div><div class="cert-name">AWS Cloud Practitioner</div><div class="cert-issuer">Amazon Web Services</div></div>
                     <div class="cert-badge">✓</div>
                 </div>
                 <div class="cert-item earned">
                     <div class="cert-icon">💰</div>
-                    <div class="cert-info">
-                        <div class="cert-name">AWS FinOps Practitioner</div>
-                        <div class="cert-issuer">Amazon Web Services</div>
-                    </div>
+                    <div><div class="cert-name">AWS FinOps Practitioner</div><div class="cert-issuer">Amazon Web Services</div></div>
                     <div class="cert-badge">✓</div>
                 </div>
             </div>
 
-            <div class="section-title">› Em andamento / Planejadas</div>
+            <div class="section-title" data-en="› In Progress / Planned" data-pt="› Em andamento / Planejadas">› In Progress / Planned</div>
             <div class="cert-grid">
-                <div class="cert-item">
-                    <div class="cert-icon">🤖</div>
-                    <div class="cert-info">
-                        <div class="cert-name">AWS AI Practitioner</div>
-                        <div class="cert-issuer">Amazon Web Services</div>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-icon">🏗️</div>
-                    <div class="cert-info">
-                        <div class="cert-name">AWS Solutions Architect Associate</div>
-                        <div class="cert-issuer">Amazon Web Services</div>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-icon">⎈</div>
-                    <div class="cert-info">
-                        <div class="cert-name">CKAD</div>
-                        <div class="cert-issuer">CNCF / Linux Foundation</div>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-icon">⚙️</div>
-                    <div class="cert-info">
-                        <div class="cert-name">AWS CloudOps / SysOps</div>
-                        <div class="cert-issuer">Amazon Web Services</div>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-icon">👩‍💻</div>
-                    <div class="cert-info">
-                        <div class="cert-name">AWS Developer Associate</div>
-                        <div class="cert-issuer">Amazon Web Services</div>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-icon">🔵</div>
-                    <div class="cert-info">
-                        <div class="cert-name">Microsoft Azure Fundamentals (AZ-900)</div>
-                        <div class="cert-issuer">Microsoft</div>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-icon">🔒</div>
-                    <div class="cert-info">
-                        <div class="cert-name">CCST Cybersecurity</div>
-                        <div class="cert-issuer">Cisco</div>
-                    </div>
-                </div>
+                <div class="cert-item"><div class="cert-icon">🤖</div><div><div class="cert-name">AWS AI Practitioner</div><div class="cert-issuer">Amazon Web Services</div></div></div>
+                <div class="cert-item"><div class="cert-icon">🏗️</div><div><div class="cert-name">AWS Solutions Architect Associate</div><div class="cert-issuer">Amazon Web Services</div></div></div>
+                <div class="cert-item"><div class="cert-icon">⎈</div><div><div class="cert-name">CKAD</div><div class="cert-issuer">CNCF / Linux Foundation</div></div></div>
+                <div class="cert-item"><div class="cert-icon">⚙️</div><div><div class="cert-name">AWS CloudOps / SysOps</div><div class="cert-issuer">Amazon Web Services</div></div></div>
+                <div class="cert-item"><div class="cert-icon">👩‍💻</div><div><div class="cert-name">AWS Developer Associate</div><div class="cert-issuer">Amazon Web Services</div></div></div>
+                <div class="cert-item"><div class="cert-icon">🔵</div><div><div class="cert-name">Azure Fundamentals (AZ-900)</div><div class="cert-issuer">Microsoft</div></div></div>
+                <div class="cert-item"><div class="cert-icon">🔒</div><div><div class="cert-name">CCST Cybersecurity</div><div class="cert-issuer">Cisco</div></div></div>
             </div>
         </div>
 
-        <!-- ===== PROJETOS ===== -->
+        <!-- PROJECTS -->
         <div class="panel" id="panel-projects">
-            <div class="section-title">› Projetos</div>
+            <div class="section-title" data-en="› Projects" data-pt="› Projetos">› Projects</div>
 
             <div class="project-card">
                 <div class="proj-name">🌿 Carbon Lens</div>
-                <div class="proj-desc">
-                    Ferramenta CLI/Web para visibilidade de pegada de carbono em infraestrutura AWS.
-                    Interface TUI estilo terminal, correlação custo × emissão de CO₂, sugestões de otimização verde.
+                <div class="proj-desc" data-en="CLI/Web tool for carbon footprint visibility in AWS infrastructure. Terminal-style UI, cost × CO₂ correlation, green optimization suggestions." data-pt="Ferramenta CLI/Web para visibilidade de pegada de carbono em infra AWS. Interface terminal, correlação custo × CO₂, sugestões de otimização verde.">
+                    CLI/Web tool for carbon footprint visibility in AWS infrastructure. Terminal-style UI, cost × CO₂ correlation, green optimization suggestions.
                 </div>
-                <div class="proj-tags">
-                    <span class="article-tag">GreenOps</span>
-                    <span class="article-tag">AWS</span>
-                    <span class="article-tag">Open Source</span>
-                    <span class="article-tag">Web</span>
-                </div>
-                <a class="proj-link" href="https://annalaudaress.github.io/carbon-lens/" target="_blank">→ ver projeto</a>
+                <div class="proj-tags"><span class="tag">GreenOps</span><span class="tag">AWS</span><span class="tag">TypeScript</span></div>
+                <a class="proj-link" href="https://annalaudaress.github.io/carbon-lens/" target="_blank">→ live demo</a>
             </div>
 
             <div class="project-card">
-                <div class="proj-name">⎈ PDI Interativo</div>
-                <div class="proj-desc">
-                    Plano de Desenvolvimento Individual com interface k9s — metas com checklist,
-                    roadmap técnico, tracker de certificações e skills.
+                <div class="proj-name">🔐 Lacrei Saúde API — DevSecOps Challenge</div>
+                <div class="proj-desc" data-en="DevSecOps challenge: containerized API with security best practices, Dockerfile hardening, and infrastructure automation." data-pt="Desafio DevSecOps: API containerizada com boas práticas de segurança, hardening de Dockerfile e automação de infraestrutura.">
+                    DevSecOps challenge: containerized API with security best practices, Dockerfile hardening, and infrastructure automation.
                 </div>
-                <div class="proj-tags">
-                    <span class="article-tag">Carreira</span>
-                    <span class="article-tag">Web</span>
-                    <span class="article-tag">k9s-style</span>
+                <div class="proj-tags"><span class="tag">Docker</span><span class="tag">DevSecOps</span><span class="tag">Security</span></div>
+                <a class="proj-link" href="https://github.com/annalaudaress/lacrei-saude-api" target="_blank">→ repo</a>
+            </div>
+
+            <div class="project-card">
+                <div class="proj-name">🏗️ Projeto Avanti — Terraform IaC</div>
+                <div class="proj-desc" data-en="Infrastructure as Code project using Terraform for cloud resource provisioning and management." data-pt="Projeto de Infrastructure as Code usando Terraform para provisionamento e gestão de recursos cloud.">
+                    Infrastructure as Code project using Terraform for cloud resource provisioning and management.
                 </div>
-                <a class="proj-link" href="https://annalaudaress.github.io/pdi/" target="_blank">→ ver projeto</a>
+                <div class="proj-tags"><span class="tag">Terraform</span><span class="tag">HCL</span><span class="tag">IaC</span></div>
+                <a class="proj-link" href="https://github.com/annalaudaress/Projeto-Avanti" target="_blank">→ repo</a>
+            </div>
+
+            <div class="project-card">
+                <div class="proj-name">🐳 Inovatech — Docker + Terraform</div>
+                <div class="proj-desc" data-en="Infrastructure project combining Docker containers with Terraform provisioning." data-pt="Projeto de infraestrutura combinando containers Docker com provisionamento Terraform.">
+                    Infrastructure project combining Docker containers with Terraform provisioning.
+                </div>
+                <div class="proj-tags"><span class="tag">Docker</span><span class="tag">Terraform</span><span class="tag">HCL</span></div>
+                <a class="proj-link" href="https://github.com/annalaudaress/inovatech" target="_blank">→ repo</a>
+            </div>
+
+            <div class="project-card">
+                <div class="proj-name">🧠 Avanti ML</div>
+                <div class="proj-desc" data-en="Machine Learning project with Python — data processing and model training." data-pt="Projeto de Machine Learning com Python — processamento de dados e treinamento de modelos.">
+                    Machine Learning project with Python — data processing and model training.
+                </div>
+                <div class="proj-tags"><span class="tag">Python</span><span class="tag">ML</span></div>
+                <a class="proj-link" href="https://github.com/annalaudaress/avantiml" target="_blank">→ repo</a>
             </div>
         </div>
 
-        <!-- ===== ARTIGOS ===== -->
+        <!-- ARTICLES -->
         <div class="panel" id="panel-articles">
-            <div class="section-title">› Artigos</div>
+            <div class="section-title" data-en="› Articles" data-pt="› Artigos">› Articles</div>
 
             <a class="article-card" href="#" target="_blank">
                 <div class="article-date">MONTH/YEAR</div>
-                <div class="article-title">TÍTULO DO ARTIGO</div>
-                <div class="article-desc">Descrição breve do artigo.</div>
-                <div class="article-tags">
-                    <span class="article-tag">TAG</span>
-                </div>
+                <div class="article-title">ARTICLE TITLE</div>
+                <div class="article-desc">Brief description.</div>
+                <div class="article-tags"><span class="tag">TAG</span></div>
             </a>
 
-            <div style="margin-top:16px; padding:12px; border:1px dashed var(--border); border-radius:6px; color:var(--text-secondary); font-size:11px;">
-                💡 Edite <code>panel-articles</code> no HTML para adicionar seus artigos.
+            <div class="placeholder" data-en="💡 Edit panel-articles in the HTML to add your published articles." data-pt="💡 Edite panel-articles no HTML para adicionar seus artigos publicados.">
+                💡 Edit panel-articles in the HTML to add your published articles.
             </div>
         </div>
 
-        <!-- ===== SPEAKER ===== -->
+        <!-- SPEAKER -->
         <div class="panel" id="panel-speaker">
-            <div class="section-title">› Talks & Palestras</div>
+            <div class="section-title" data-en="› Talks & Presentations" data-pt="› Talks & Palestras">› Talks & Presentations</div>
 
             <div class="talk-card">
-                <div class="talk-event">EVENTO</div>
-                <div class="talk-title">TÍTULO DA TALK</div>
-                <div class="talk-meta">
-                    <span>📅 Mês/Ano</span>
-                    <span>📍 Local</span>
-                </div>
-                <div class="talk-desc">Descrição da palestra.</div>
-                <a class="talk-link" href="#" target="_blank">→ slides / gravação</a>
+                <div class="talk-event">EVENT NAME</div>
+                <div class="talk-title">TALK TITLE</div>
+                <div class="talk-meta"><span>📅 Month/Year</span><span>📍 Location</span></div>
+                <div class="talk-desc">Talk description.</div>
+                <a class="talk-link" href="#" target="_blank">→ slides / recording</a>
             </div>
 
-            <div style="margin-top:16px; padding:12px; border:1px dashed var(--border); border-radius:6px; color:var(--text-secondary); font-size:11px;">
-                💡 Edite <code>panel-speaker</code> no HTML para adicionar suas talks.
+            <div class="placeholder" data-en="💡 Edit panel-speaker in the HTML to add your talks." data-pt="💡 Edite panel-speaker no HTML para adicionar suas talks.">
+                💡 Edit panel-speaker in the HTML to add your talks.
             </div>
         </div>
 
-        <!-- ===== COMUNIDADE ===== -->
+        <!-- COMMUNITY -->
         <div class="panel" id="panel-community">
-            <div class="section-title">› Comunidade</div>
+            <div class="section-title" data-en="› Community" data-pt="› Comunidade">› Community</div>
             <div class="community-grid">
+                <div class="community-card">
+                    <div class="comm-icon">🔥</div>
+                    <div class="comm-title">DevOpsDays BH — Organizer</div>
+                    <div class="comm-desc" data-en="Co-organizer of DevOpsDays Belo Horizonte, one of the main DevOps community events in Brazil." data-pt="Co-organizadora do DevOpsDays Belo Horizonte, um dos principais eventos de comunidade DevOps no Brasil.">
+                        Co-organizer of DevOpsDays Belo Horizonte, one of the main DevOps community events in Brazil.
+                    </div>
+                </div>
+                <div class="community-card">
+                    <div class="comm-icon">🐍</div>
+                    <div class="comm-title">Python Sudeste — Organizer</div>
+                    <div class="comm-desc" data-en="Organized Python Sudeste, a regional Python community conference." data-pt="Organizou Python Sudeste, conferência regional da comunidade Python.">
+                        Organized Python Sudeste, a regional Python community conference.
+                    </div>
+                </div>
                 <div class="community-card">
                     <div class="comm-icon">🎓</div>
                     <div class="comm-title">Google Student Ambassador</div>
-                    <div class="comm-desc">Representante estudantil do programa Google, promovendo tecnologia e eventos na comunidade acadêmica.</div>
+                    <div class="comm-desc" data-en="Google student representative, promoting technology and events in the academic community." data-pt="Representante estudantil Google, promovendo tecnologia e eventos na comunidade acadêmica.">
+                        Google student representative, promoting technology and events in the academic community.
+                    </div>
                 </div>
                 <div class="community-card">
                     <div class="comm-icon">🎤</div>
                     <div class="comm-title">Speaker</div>
-                    <div class="comm-desc">Palestrante em eventos de tecnologia, compartilhando conhecimento sobre DevOps, cloud e infraestrutura.</div>
+                    <div class="comm-desc" data-en="Speaker at tech events, sharing knowledge about DevOps, cloud, and infrastructure." data-pt="Palestrante em eventos tech, compartilhando sobre DevOps, cloud e infraestrutura.">
+                        Speaker at tech events, sharing knowledge about DevOps, cloud, and infrastructure.
+                    </div>
                 </div>
                 <div class="community-card">
                     <div class="comm-icon">🤝</div>
-                    <div class="comm-title">Mentora</div>
-                    <div class="comm-desc">Mentoria para pessoas em início de carreira em DevOps e infraestrutura cloud.</div>
+                    <div class="comm-title" data-en="Mentor" data-pt="Mentora">Mentor</div>
+                    <div class="comm-desc" data-en="Mentoring people starting their career in DevOps and cloud infrastructure." data-pt="Mentoria para pessoas em início de carreira em DevOps e infraestrutura cloud.">
+                        Mentoring people starting their career in DevOps and cloud infrastructure.
+                    </div>
                 </div>
             </div>
 
-            <div class="section-title">› Metas de comunidade</div>
+            <div class="section-title" data-en="› Goals" data-pt="› Metas">› Goals</div>
             <div class="community-grid">
                 <div class="community-card">
                     <div class="comm-icon">⎈</div>
                     <div class="comm-title">KCNA Community Ambassador</div>
-                    <div class="comm-desc">Meta: tornar-se ambassador da comunidade CNCF/Kubernetes.</div>
+                    <div class="comm-desc" data-en="Goal: become a CNCF/Kubernetes community ambassador." data-pt="Meta: tornar-se ambassador da comunidade CNCF/Kubernetes.">Goal: become a CNCF/Kubernetes community ambassador.</div>
                 </div>
                 <div class="community-card">
                     <div class="comm-icon">☁️</div>
                     <div class="comm-title">AWS Community Builder</div>
-                    <div class="comm-desc">Meta: ser aceita no programa AWS Community Builders.</div>
+                    <div class="comm-desc" data-en="Goal: be accepted into the AWS Community Builders program." data-pt="Meta: ser aceita no programa AWS Community Builders.">Goal: be accepted into the AWS Community Builders program.</div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== CONTATO ===== -->
+        <!-- CONTACT -->
         <div class="panel" id="panel-contact">
-            <div class="section-title">› Contato</div>
+            <div class="section-title" data-en="› Contact" data-pt="› Contato">› Contact</div>
             <div class="contact-grid">
                 <a class="contact-item" href="https://github.com/annalaudaress" target="_blank">
                     <div class="contact-icon">⎈</div>
@@ -735,38 +488,52 @@
                     <div class="contact-label">LinkedIn</div>
                     <div class="contact-value">SEU-LINKEDIN</div>
                 </a>
-                <a class="contact-item" href="mailto:SEU-EMAIL" target="_blank">
+                <a class="contact-item" href="mailto:SEU-EMAIL">
                     <div class="contact-icon">✉</div>
                     <div class="contact-label">Email</div>
                     <div class="contact-value">SEU-EMAIL</div>
                 </a>
             </div>
-
-            <div style="margin-top:24px; padding:16px; border:1px solid var(--border); border-radius:6px; background:var(--bg-secondary);">
-                <p style="color:var(--text-secondary); font-size:12px; line-height:1.8;">
-                    Aberta a convites para <strong style="color:var(--accent-green)">palestras</strong>,
-                    <strong style="color:var(--accent-purple)">podcasts</strong>,
-                    <strong style="color:var(--accent-blue)">colaborações open-source</strong> e
-                    <strong style="color:var(--accent-cyan)">oportunidades</strong>.
-                </p>
+            <div class="open-to" data-en="Open to <strong>talks</strong>, <strong>podcasts</strong>, <strong>open-source collaborations</strong>, and <strong>opportunities</strong>." data-pt="Aberta a <strong>palestras</strong>, <strong>podcasts</strong>, <strong>colaborações open-source</strong> e <strong>oportunidades</strong>.">
+                Open to <strong>talks</strong>, <strong>podcasts</strong>, <strong>open-source collaborations</strong>, and <strong>opportunities</strong>.
             </div>
         </div>
 
     </div>
 
-    <!-- FOOTER -->
     <div class="footer">
-        <div class="left-foot"><kbd>1-7</kbd> navegar</div>
+        <div class="left-foot"><kbd>1-7</kbd> navigate</div>
         <div class="right-foot">● annabuilds</div>
     </div>
 
     <script>
+        let lang = 'en';
+
         function showPanel(name) {
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
             document.getElementById('panel-' + name).classList.add('active');
             document.querySelector(`[data-panel="${name}"]`).classList.add('active');
         }
+
+        function toggleLang() {
+            lang = lang === 'en' ? 'pt' : 'en';
+            document.querySelectorAll('[data-en][data-pt]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) el.innerHTML = text;
+            });
+            localStorage.setItem('site-lang', lang);
+        }
+
+        // Load saved language
+        (function() {
+            const saved = localStorage.getItem('site-lang');
+            if (saved && saved !== lang) {
+                lang = saved;
+                toggleLang();
+                lang = saved; // toggleLang flips it, so reset
+            }
+        })();
 
         document.addEventListener('keydown', (e) => {
             const panels = ['about', 'certs', 'projects', 'articles', 'speaker', 'community', 'contact'];
