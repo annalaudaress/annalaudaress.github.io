@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>anna — devops zine</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap');
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --paper: #1a1a2e;
-            --panel: #16213e;
-            --panel2: #0f3460;
-            --ink: #eaeaea;
-            --accent1: #e94560;
-            --accent2: #ffd369;
-            --accent3: #00fff5;
-            --accent4: #a8ff78;
-            --accent5: #ff6b9d;
-            --marker: 'Permanent Marker', cursive;
-            --hand: 'Caveat', cursive;
-            --mono: 'Space Mono', monospace;
+            --paper: #121212;
+            --panel: #1a1a1a;
+            --panel2: #1f1f1f;
+            --ink: #e0e0e0;
+            --accent1: #c4b5fd;
+            --accent2: #c4b5fd;
+            --accent3: #e0e0e0;
+            --accent4: #c4b5fd;
+            --accent5: #888;
+            --marker: 'JetBrains Mono', monospace;
+            --hand: 'JetBrains Mono', monospace;
+            --mono: 'JetBrains Mono', monospace;
         }
 
         body {
@@ -30,9 +30,6 @@
             color: var(--ink);
             min-height: 100vh;
             font-size: 14px;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(233,69,96,0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(0,255,245,0.04) 0%, transparent 40%);
         }
 
         /* ===== COVER ===== */
@@ -40,23 +37,26 @@
             padding: 50px 30px;
             text-align: center;
             position: relative;
-            border-bottom: 4px solid var(--accent1);
+            border-bottom: 3px solid #333;
         }
 
         .cover h1 {
             font-family: var(--marker);
-            font-size: clamp(60px, 12vw, 100px);
+            font-size: clamp(44px, 10vw, 72px);
+            font-weight: 800;
             color: var(--accent3);
-            text-shadow: 4px 4px 0 var(--accent1), -2px -2px 0 var(--panel);
-            transform: rotate(-2deg);
+            text-shadow: 3px 3px 0 var(--accent1), -1px -1px 0 var(--panel);
+            transform: rotate(-1deg);
             margin-bottom: 8px;
         }
 
         .cover .subtitle {
             font-family: var(--hand);
-            font-size: 28px;
+            font-size: 14px;
             color: var(--accent2);
             transform: rotate(1deg);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .cover .issue {
@@ -95,7 +95,7 @@
             padding: 12px;
             flex-wrap: wrap;
             background: rgba(0,0,0,0.3);
-            border-bottom: 3px solid var(--accent2);
+            border-bottom: 2px solid #333;
         }
 
         .nav-strip button {
@@ -177,8 +177,8 @@
 
         .comic-panel p {
             font-family: var(--hand);
-            font-size: 18px;
-            line-height: 1.5;
+            font-size: 12px;
+            line-height: 1.6;
             color: var(--ink);
         }
 
@@ -190,26 +190,26 @@
 
         /* ===== SPEECH BUBBLE ===== */
         .bubble {
-            background: white;
-            color: var(--paper);
+            background: #222;
+            color: var(--ink);
             font-family: var(--hand);
-            font-size: 18px;
-            padding: 14px 18px;
-            border-radius: 20px;
+            font-size: 13px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #333;
             position: relative;
             display: inline-block;
             margin: 10px 0;
-            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
         }
 
         .bubble::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -8px;
             left: 24px;
-            border-width: 10px 8px 0;
+            border-width: 8px 6px 0;
             border-style: solid;
-            border-color: white transparent transparent;
+            border-color: #222 transparent transparent;
         }
 
         /* ===== STICKER ===== */
@@ -223,11 +223,11 @@
             margin: 3px;
         }
 
-        .sticker-1 { border-color: var(--accent1); color: var(--accent1); }
-        .sticker-2 { border-color: var(--accent3); color: var(--accent3); }
-        .sticker-3 { border-color: var(--accent2); color: var(--accent2); }
-        .sticker-4 { border-color: var(--accent4); color: var(--accent4); }
-        .sticker-5 { border-color: var(--accent5); color: var(--accent5); }
+        .sticker-1 { border-color: #555; color: #ccc; }
+        .sticker-2 { border-color: #555; color: #ccc; }
+        .sticker-3 { border-color: #555; color: #ccc; }
+        .sticker-4 { border-color: #555; color: #ccc; }
+        .sticker-5 { border-color: #555; color: #ccc; }
 
         .stickers { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 4px; }
 
@@ -254,7 +254,7 @@
 
         .exp-block .exp-desc {
             font-family: var(--hand);
-            font-size: 17px;
+            font-size: 12px;
             color: #bbb;
         }
 
@@ -279,7 +279,7 @@
 
         .cert-entry .cert-name {
             font-family: var(--hand);
-            font-size: 18px;
+            font-size: 12px;
             flex: 1;
         }
 
@@ -290,28 +290,29 @@
 
         /* ===== PROJECT CARDS ===== */
         .proj-card {
-            border: 3px solid var(--accent4);
+            border: 2px solid #333;
             padding: 18px;
             margin-bottom: 14px;
             background: var(--panel);
-            box-shadow: 4px 4px 0 rgba(168,255,120,0.1);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
             transform: rotate(0.3deg);
         }
 
-        .proj-card:nth-child(even) { transform: rotate(-0.3deg); border-color: var(--accent3); }
+        .proj-card:nth-child(even) { transform: rotate(-0.3deg); border-color: #333; }
 
         .proj-card .proj-name {
             font-family: var(--marker);
-            font-size: 16px;
-            color: var(--accent4);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ink);
             margin-bottom: 6px;
         }
 
-        .proj-card:nth-child(even) .proj-name { color: var(--accent3); }
+        .proj-card:nth-child(even) .proj-name { color: var(--ink); }
 
         .proj-card .proj-desc {
             font-family: var(--hand);
-            font-size: 17px;
+            font-size: 12px;
             color: #bbb;
             margin-bottom: 8px;
         }
@@ -350,7 +351,8 @@
 
         .zine-entry .ze-title {
             font-family: var(--hand);
-            font-size: 22px;
+            font-size: 14px;
+            font-weight: 700;
             color: var(--ink);
             margin: 4px 0;
         }
@@ -381,11 +383,11 @@
             min-width: 140px;
         }
 
-        .comm-badge:nth-child(1) { border-color: var(--accent1); transform: rotate(-2deg); }
-        .comm-badge:nth-child(2) { border-color: var(--accent3); transform: rotate(1deg); }
-        .comm-badge:nth-child(3) { border-color: var(--accent2); transform: rotate(-1deg); }
-        .comm-badge:nth-child(4) { border-color: var(--accent5); transform: rotate(2deg); }
-        .comm-badge:nth-child(5) { border-color: var(--accent4); transform: rotate(-0.5deg); }
+        .comm-badge:nth-child(1) { border-color: #444; transform: rotate(-2deg); }
+        .comm-badge:nth-child(2) { border-color: #444; transform: rotate(1deg); }
+        .comm-badge:nth-child(3) { border-color: #444; transform: rotate(-1deg); }
+        .comm-badge:nth-child(4) { border-color: #444; transform: rotate(2deg); }
+        .comm-badge:nth-child(5) { border-color: #444; transform: rotate(-0.5deg); }
 
         .comm-badge .cb-role {
             font-family: var(--marker);
@@ -395,7 +397,7 @@
 
         .comm-badge .cb-org {
             font-family: var(--hand);
-            font-size: 16px;
+            font-size: 12px;
             color: #bbb;
         }
 
@@ -424,7 +426,7 @@
 
         .contact-block .cb-value {
             font-family: var(--hand);
-            font-size: 20px;
+            font-size: 13px;
             color: var(--accent3);
             margin-top: 4px;
         }
@@ -559,7 +561,7 @@
             <div class="ze-desc">Brief description.</div>
             <a href="#">→ read</a>
         </div>
-        <p style="font-family:var(--hand);font-size:18px;color:#666;margin-top:16px" data-en="✏️ more articles coming soon..." data-pt="✏️ mais artigos em breve...">✏️ more articles coming soon...</p>
+        <p style="font-size:12px;color:#666;margin-top:16px" data-en="✏️ more articles coming soon..." data-pt="✏️ mais artigos em breve...">✏️ more articles coming soon...</p>
     </div>
 
     <!-- TALKS -->
@@ -570,7 +572,7 @@
             <div class="ze-desc">Description.</div>
             <a href="#">→ slides</a>
         </div>
-        <p style="font-family:var(--hand);font-size:18px;color:#666;margin-top:16px" data-en="🎤 more talks coming soon..." data-pt="🎤 mais talks em breve...">🎤 more talks coming soon...</p>
+        <p style="font-size:12px;color:#666;margin-top:16px" data-en="🎤 more talks coming soon..." data-pt="🎤 mais talks em breve...">🎤 more talks coming soon...</p>
     </div>
 
     <!-- COMMUNITY -->
@@ -599,7 +601,7 @@
                     <div class="cb-label">Email</div><div class="cb-value">SEU-EMAIL</div>
                 </a>
             </div>
-            <p style="font-family:var(--hand);font-size:20px;color:var(--accent2);margin-top:18px" data-en="✨ open to talks, podcasts, collabs & opportunities!" data-pt="✨ aberta a palestras, podcasts, collabs & oportunidades!">✨ open to talks, podcasts, collabs & opportunities!</p>
+            <p style="font-size:12px;color:var(--accent2);margin-top:18px" data-en="open to talks, podcasts, collabs & opportunities." data-pt="aberta a palestras, podcasts, collabs & oportunidades.">open to talks, podcasts, collabs & opportunities.</p>
         </div>
     </div>
 
